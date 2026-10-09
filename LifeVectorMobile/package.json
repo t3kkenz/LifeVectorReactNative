@@ -1,35 +1,41 @@
 {
   "name": "lifevectormobile",
-  "version": "1.0.0",
-  "description": "An app to track your life, your data is valuable, it defines you, know thyself. Uses bluetooth to communicate with raspberry pi backend.",
+  "version": "2.0.0",
+  "private": true,
+  "description": "LifeVector mobile tracker for securely collecting LifePi location records over Bluetooth.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "bundle:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output build/index.android.bundle --assets-dest build",
+    "doctor": "react-native doctor",
+    "audit": "npm audit --audit-level=high"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.11.6",
-    "@babel/plugin-syntax-export-default-from": "^7.10.4",
-    "@babel/runtime": "^7.11.2",
-    "@react-native-community/async-storage": "^1.12.0",
-    "babel-preset-react-native": "^4.0.0",
-    "convert-string": "^0.1.0",
-    "gensync": "^1.0.0-beta.1",
-    "hermes-engine": "0.5.1",
-    "jsc-android": "^241213.1.0",
-    "metro-react-native-babel-preset": "^0.63.0",
-    "node-forge": "^0.10.0",
-    "react": "16.6.3",
-    "react-native": "0.59",
-    "react-native-background-timer": "^2.4.0",
-    "react-native-ble-manager": "^7.3.1",
-    "react-native-ble-plx": "^2.0.1",
-    "react-native-button": "^3.0.1",
-    "react-native-charts-wrapper": "^0.5.7",
-    "react-native-device-info": "^6.0.2",
-    "react-native-push-notification": "^5.1.1",
-    "react-native-spinkit": "^1.5.0",
-    "react-native-unique-id": "^2.0.0"
-  }
+    "@craftzdog/react-native-buffer": "6.1.2",
+    "@react-native-async-storage/async-storage": "3.1.1",
+    "react": "19.3.0",
+    "react-native": "0.87.1",
+    "react-native-background-timer": "2.4.1",
+    "react-native-ble-manager": "12.5.3",
+    "react-native-device-info": "15.0.2",
+    "react-native-nitro-modules": "0.37.1",
+    "react-native-quick-base64": "3.0.1",
+    "react-native-quick-crypto": "1.1.8",
+    "react-native-safe-area-context": "5.10.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.29.7",
+    "@babel/runtime": "7.29.2",
+    "@react-native-community/cli": "20.2.0",
+    "@react-native-community/cli-platform-android": "20.2.0",
+    "@react-native-community/cli-platform-ios": "20.2.0",
+    "@react-native/babel-preset": "0.87.1",
+    "@react-native/metro-config": "0.87.1"
+  },
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "packageManager": "npm@10.9.8"
 }
