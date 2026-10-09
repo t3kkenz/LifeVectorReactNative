@@ -1,42 +1,76 @@
-# Life Vector React Native Front-end
+# LifeVector
 
-## UI as shown on Android Emulator
+LifeVector is a personal location tracker that helps people understand where their time goes. The project has two complementary interfaces:
+
+- **LifeVector Mobile** discovers a nearby LifePi tracker over Bluetooth and securely collects its location records.
+- **LifeVector Dashboard** turns those records into a clear view of daily rhythm, time by place, recurring patterns, and recent sessions.
+
+## Browser dashboard
+
+The dashboard is a dependency-free web application in [`dashboard/`](dashboard/). It includes responsive desktop and mobile layouts, 7/14/30-day ranges, place filters, JSON import and download, and sample data for trying the interface without a tracker.
+
+Run it locally with any static file server:
+
+```bash
+cd dashboard
+python3 -m http.server 8080
+```
+
+Then open `http://localhost:8080`.
+
+### Import format
+
+Imported files stay in the browser and use this shape. Durations are expressed in minutes.
+
+```json
+{
+  "places": [
+    { "name": "Home", "color": "#a8df65" },
+    { "name": "Gym", "color": "#d99aa5" }
+  ],
+  "days": [
+    {
+      "date": "2026-10-09",
+      "places": {
+        "Home": 510,
+        "Gym": 65
+      }
+    }
+  ]
+}
+```
+
+The `places` array is optional. When it is omitted, the dashboard assigns colors to every place found under `days`.
+
+The dashboard can also be fed directly from another browser application:
+
+```js
+window.LifeVectorDashboard.load(data);
+```
+
+## Mobile tracker
+
+The original React Native application lives in [`LifeVectorMobile/`](LifeVectorMobile/). It targets Android API 28 and uses Bluetooth Low Energy to discover LifePi devices, establish an encrypted exchange, and collect tracker data in the background.
+
+The mobile client is a legacy React Native 0.59 project. To run it, install the Android API 28 SDK and the JavaScript dependencies from `LifeVectorMobile`, then link the native dependencies and start the Android build:
+
+```bash
+cd LifeVectorMobile
+npm install
+npx react-native link
+npx react-native run-android
+```
+
+The LifePi service must be available for Bluetooth discovery and live collection.
+
+## Original mobile UI
 
 ### Login
-![LifeVector Login](lv-login.jpg)
 
-### Graph
-![LifeVector Graph](lv_graph.png)
+![LifeVector login](lv-login.jpg)
 
+### Time by place
 
-## Steps to start the front-end
-
-**Note: Ensure that your server is set up first.**
-
-### Step 1: 
-Install JDK, NPM, node, Android Studio, android studio build tools, android studio API 28, yarn, and react-native.
-Need android studio sdk 28 and android version Pie
-
-### Step 2: 
-Make a "local.properties" under group3/LifeVectorMobile/Android and place the following: "sdk.dir = {Your android studio SDK directory}" **without the curly brackets
-
-### Step 3: 
-Run 'npm install' in LifeVectorMobile directory
-
-### Step 4: 
-Run 'yarn add react-native-charts-wrapper' and 'yarn add @babel/runtime'
-
-### Step 5: 
-Run 'react-native link'
-
-### Step 6: 
-Run 'react-native run-android'
+![LifeVector time by place graph](lv_graph.png)
 
 ((Project))
-
-
-
-
-
-
-
