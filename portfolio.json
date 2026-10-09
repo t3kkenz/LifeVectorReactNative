@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "title": "LifeVector",
-  "summary": "A mobile activity tracker with a browser dashboard for reviewing tracked results.",
+  "summary": "A private location tracker paired with an interactive browser dashboard for understanding where your time goes.",
   "preview": {
     "type": "iframe",
-    "url": "/previews/life-vector/",
+    "url": "/previews/life-vector/?v=lifevector-dashboard-v2",
     "image": "images/va@2x.png"
   },
   "download": "https://github.com/t3kkenz/LifeVectorReactNative/releases/download/browser-dashboard-v1.0.0/lifevector-browser-dashboard.zip"

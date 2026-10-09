@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f2ec">
+  <meta name="description" content="LifeVector turns location history into a clear picture of how you spend your time.">
+  <title>LifeVector · Your time, in context</title>
+  <link rel="icon" href="./lifevector-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="./style.css?v=lifevector-dashboard-v2">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="LifeVector navigation">
+      <a class="brand" href="#overview" aria-label="LifeVector dashboard home">
+        <img src="./lifevector-mark.svg" alt="">
+        <span>LifeVector</span>
+      </a>
+
+      <nav class="nav-list">
+        <a class="nav-item is-active" href="#overview" data-section="overview">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 13h6V4H4v9Zm0 7h6v-4H4v4Zm10 0h6v-9h-6v9Zm0-12h6V4h-6v4Z"/></svg>
+          Overview
+        </a>
+        <a class="nav-item" href="#rhythm" data-section="rhythm">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19V9m5 10V5m6 14v-7m5 7V3"/></svg>
+          Rhythm
+        </a>
+        <a class="nav-item" href="#places" data-section="places">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/></svg>
+          Places
+        </a>
+        <a class="nav-item" href="#sessions" data-section="sessions">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 3h12v18H6zM9 7h6m-6 4h6m-6 4h4"/></svg>
+          Sessions
+        </a>
+      </nav>
+
+      <div class="tracker-card">
+        <div class="tracker-state"><span class="pulse"></span> Tracker synced</div>
+        <strong>LifePi · Home</strong>
+        <span id="last-sync">Updated just now</span>
+      </div>
+
+      <p class="privacy-note">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 10V8a5 5 0 0 1 10 0v2m-11 0h12v10H6V10Z"/></svg>
+        Your imported data stays in this browser.
+      </p>
+    </aside>
+
+    <main class="main-content">
+      <header class="mobile-header">
+        <a class="brand" href="#overview"><img src="./lifevector-mark.svg" alt=""><span>LifeVector</span></a>
+        <button class="menu-button" id="menu-button" type="button" aria-label="Open navigation" aria-expanded="false">
+          <span></span><span></span>
+        </button>
+      </header>
+
+      <section class="page-header" id="overview">
+        <div>
+          <p class="eyebrow">PERSONAL TIME INTELLIGENCE</p>
+          <h1>Your week<br><em>in motion.</em></h1>
+          <p class="date-range" id="date-range">Loading your recent pattern…</p>
+        </div>
+        <div class="header-actions">
+          <input id="data-file" type="file" accept="application/json,.json" hidden>
+          <button class="button button-quiet" id="sample-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.7M20 4v6h-6"/></svg>
+            Reset sample
+          </button>
+          <button class="button button-primary" id="import-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 20h14"/></svg>
+            Import tracker data
+          </button>
+        </div>
+      </section>
+
+      <div class="range-row" aria-label="Dashboard date range">
+        <div class="segmented-control" id="range-control">
+          <button type="button" data-days="7" class="is-selected">7 days</button>
+          <button type="button" data-days="14">14 days</button>
+          <button type="button" data-days="30">30 days</button>
+        </div>
+        <span class="data-label"><span class="live-dot"></span> Sample tracker data</span>
+      </div>
+
+      <section class="overview-grid" aria-label="LifeVector overview">
+        <article class="vector-card card">
+          <div class="card-heading inverse">
+            <div><span>Your LifeVector</span><h2 id="vector-title">A balanced week</h2></div>
+            <button class="icon-button dark" type="button" aria-label="About LifeVector" data-tip="Each ray represents your share of tracked time at a place.">?</button>
+          </div>
+          <div class="vector-visual" id="vector-visual" aria-label="Place distribution vector">
+            <div class="vector-ray vector-ray-north" data-vector-index="0"></div>
+            <div class="vector-ray vector-ray-east" data-vector-index="1"></div>
+            <div class="vector-ray vector-ray-south" data-vector-index="2"></div>
+            <div class="vector-ray vector-ray-west" data-vector-index="3"></div>
+            <div class="vector-core"><strong id="routine-score">84</strong><span>routine<br>score</span></div>
+          </div>
+          <div class="vector-legend" id="vector-legend"></div>
+        </article>
+
+        <div class="metric-column">
+          <article class="metric-card card tracked-card">
+            <div class="metric-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 7v5l3 2m6-2a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg></div>
+            <div><span>Tracked time</span><strong id="tracked-time">—</strong><small id="tracked-change">Across your selected range</small></div>
+          </article>
+          <article class="metric-card card">
+            <div class="metric-icon warm"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-12a7 7 0 1 0-14 0c0 5.8 7 12 7 12Zm0-9a3 3 0 1 1 0-6 3 3 0 0 1 0 6Z"/></svg></div>
+            <div><span>Most time at</span><strong id="top-place">—</strong><small id="top-place-share">—</small></div>
+          </article>
+          <article class="metric-card card">
+            <div class="metric-icon rose"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg></div>
+            <div><span>Days captured</span><strong id="days-captured">—</strong><small id="coverage-label">—</small></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="card rhythm-card" id="rhythm">
+        <div class="card-heading">
+          <div><span>DAILY RHYTHM</span><h2>Where your time went</h2></div>
+          <div class="place-filters" id="place-filters" aria-label="Filter chart by place"></div>
+        </div>
+        <div class="rhythm-chart" id="rhythm-chart" aria-label="Daily time by place chart"></div>
+        <div class="chart-scale" aria-hidden="true"><span>12h</span><span>8h</span><span>4h</span><span>0h</span></div>
+      </section>
+
+      <section class="detail-grid" id="places">
+        <article class="card place-card">
+          <div class="card-heading">
+            <div><span>PLACE MIX</span><h2>Time by location</h2></div>
+            <span class="soft-label" id="place-total">—</span>
+          </div>
+          <div class="place-list" id="place-list"></div>
+        </article>
+
+        <article class="card pattern-card">
+          <div class="card-heading">
+            <div><span>WEEKLY PATTERN</span><h2>Your usual rhythm</h2></div>
+            <span class="soft-label">6am — midnight</span>
+          </div>
+          <div class="heatmap" id="heatmap"></div>
+          <div class="pattern-insight">
+            <span class="insight-mark"><img src="./lifevector-mark.svg" alt=""></span>
+            <p id="pattern-insight">Your week has a steady shape.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="card sessions-card" id="sessions">
+        <div class="card-heading">
+          <div><span>RECENT ACTIVITY</span><h2>Tracked sessions</h2></div>
+          <button class="text-button" id="download-button" type="button">Download JSON <span>↓</span></button>
+        </div>
+        <div class="session-table" role="table" aria-label="Recent tracked sessions">
+          <div class="session-row session-head" role="row">
+            <span role="columnheader">Place</span><span role="columnheader">Day</span><span role="columnheader">Time</span><span role="columnheader">Duration</span>
+          </div>
+          <div id="session-list"></div>
+        </div>
+      </section>
+
+      <footer>LifeVector <span>·</span> Understand the shape of your time.</footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="./app.js?v=lifevector-dashboard-v2"></script>
+</body>
+</html>
