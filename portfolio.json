@@ -5,6 +5,7 @@
   "preview": {
     "type": "iframe",
     "url": "/previews/life-vector/?v=lifevector-dashboard-v2",
+    "revision": "lifevector-dashboard-v2",
     "image": "images/va@2x.png"
   },
   "download": "https://github.com/t3kkenz/LifeVectorReactNative/releases/download/browser-dashboard-v2.0.0/lifevector-browser-dashboard-v2.zip"
